@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>For You my hubby ❤️</title>
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    color: white;
+    text-align: center;
+    padding: 40px;
+    overflow: hidden;
+}
+
+.page { display: none; }
+.active { display: block; }
+
+button {
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+#yesBtn { background: #ff4d6d; color: white; }
+#noBtn { background: white; color: #ff4d6d; position: absolute; }
+
+.photo {
+    width: 200px;
+    border-radius: 15px;
+    margin: 15px 0;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+}
+
+input {
+    padding:10px;
+    border-radius:10px;
+    border:none;
+    font-size:16px;
+}
+</style>
+</head>
+<body>
+
+<!-- 🎵 MUSIC -->
+<audio id="bgMusic" loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- PAGE 1 -->
+<div class="page active" id="page1">
+    <h1>Hey Amit 🥺❤️</h1>
+    <img src="cute.png" class="photo"> <!-- make sure file name matches -->
+    <p>Let’s see how well you know your girl…</p>
+    <button onclick="startGame()">Start 💌</button>
+</div>
+
+<!-- MCQ -->
+<div class="page" id="page2">
+    <h2>1. My favorite chocolate?</h2>
+    <button onclick="wrongAnswer()">Silk 🍫</button>
+    <button onclick="correctAnswer(3)">Oreo 🍫</button>
+</div>
+
+<div class="page" id="page3">
+    <h2>2. What I love doing most?</h2>
+    <button onclick="correctAnswer(4)">ghoomi ghoomi 😌</button>
+    <button onclick="wrongAnswer()">sleeping</button>
+</div>
+
+<div class="page" id="page4">
+    <h2>3. What makes me happiest?</h2>
+    <button onclick="correctAnswer(5)">You ❤️</button>
+    <button onclick="wrongAnswer()">Food 🍕</button>
+</div>
+
+<div class="page" id="page5">
+    <h2>4. What would I choose?</h2>
+    <button onclick="correctAnswer(6)">Kaach ki chudi</button>
+    <button onclick="wrongAnswer()">Sone ki bali</button>
+</div>
+
+<div class="page" id="page6">
+    <h2>5. Will u accept swara as our adopted child?</h2>
+    <button onclick="wrongAnswer()">No</button>
+    <button onclick="correctAnswer(7)">Yes</button>
+</div>
+
+<div class="page" id="page7">
+    <h2>6. My comfort food?</h2>
+    <button onclick="correctAnswer(8)">chocolate strawberry</button>
+    <button onclick="wrongAnswer()">hot chocolate</button>
+</div>
+
+<div class="page" id="page8">
+    <h2>7. Which lip balm flavor you got me?</h2>
+    <button onclick="wrongAnswer()">Chocolate</button>
+    <button onclick="correctAnswer(9)">Vanilla</button>
+</div>
+
+<!-- TEXT ANSWERS -->
+<div class="page" id="page9">
+    <h2>8. meri konsi harkat aapko cute lagti hai?</h2>
+    <input type="text" id="ans9">
+    <button onclick="checkTextAnswer('ans9',10)">Submit 💌</button>
+</div>
+
+<div class="page" id="page10">
+    <h2>9. Meko aapke saath kya karna pasand hai?</h2>
+    <input type="text" id="ans10">
+    <button onclick="checkFinalAnswer('ans10','baku bharna',11)">Submit 💌</button>
+</div>
+
+<div class="page" id="page11">
+    <h2>10. What do I love most about u?</h2>
+    <input type="text" id="ans11">
+    <button onclick="checkTextAnswer('ans11',12)">Submit 💌</button>
+</div>
+
+<div class="page" id="page12">
+    <h2>11. My biggest fear?</h2>
+    <input type="text" id="ans12">
+    <button onclick="checkFinalAnswer('ans12','losing you',13)">Submit 💌</button>
+</div>
+
+<div class="page" id="page13">
+    <h2>12. jab mai shaitani karta hu aapko kya feel hota hai?</h2>
+    <input type="text" id="ans13">
+    <button onclick="checkTextAnswer('ans13',14)">Submit 💌</button>
+</div>
+
+<div class="page" id="page14">
+    <h2>13. Maine last kajal kab lagaya tha?</h2>
+    <input type="text" id="ans14">
+    <button onclick="checkFinalAnswer('ans14','2 feb',15)">Submit 💌</button>
+</div>
+
+<div class="page" id="page15">
+    <h2 id="scoreText"></h2>
+    <h1>Will you be my Valentine? 💌</h1>
+    <button id="yesBtn" onclick="yesClicked()">YES 💖</button>
+    <button id="noBtn" onmouseover="moveButton()">No 😶</button>
+</div>
+
+<script>
+let score = 0;
+
+function startGame(){
+    document.getElementById("bgMusic").play();
+    nextPage(2);
+}
+
+function correctAnswer(next){ score++; nextPage(next); }
+function wrongAnswer(){ alert("Hehehe not this one 😝"); }
+
+function nextPage(num){
+    document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+    document.getElementById("page"+num).classList.add("active");
+    if(num===15) document.getElementById("scoreText").innerText="Score: "+score+" 💖";
+}
+
+function checkTextAnswer(id,next){
+    let v=document.getElementById(id).value.trim();
+    if(v===""){ alert("Write something 🥺"); return; }
+    alert("Aww you said: "+v);
+    nextPage(next);
+}
+
+function checkFinalAnswer(id,correct,next){
+    let v=document.getElementById(id).value.toLowerCase().trim();
+    if(v===""){ alert("Answer do 😏"); return; }
+    if(v.includes(correct)){
+        alert("Correcttt 😍");
+        score++;
+        nextPage(next);
+    } else alert("Nope 😝 try again!");
+}
+
+function yesClicked(){
+    document.body.innerHTML="<h1>YAYYY 💞</h1>";
+}
+
+function moveButton(){
+    let b=document.getElementById("noBtn");
+    b.style.left=Math.random()*(window.innerWidth-b.offsetWidth)+"px";
+    b.style.top=Math.random()*(window.innerHeight-b.offsetHeight)+"px";
+}
+</script>
+</body>
+</html>
